@@ -58,3 +58,39 @@ bool EventsList::GetData(DATA& d)
 	d = current->data;
 	return true;
 }
+
+void EventsList::Remove()
+{
+	if (current == nullptr)
+		return;
+
+	ELEMENT* e = current->prev; //points to the element which is previous to the deleted
+
+	if (e != nullptr) // checks if the deleted element has a previous one (if it isn't first)
+		e->next = current->next;
+	else
+	{
+		e = current->next;
+
+		if (e != nullptr)
+			e->prev = nullptr;
+
+		first = e;
+	}
+
+	e = current->next;
+
+	if (e != nullptr)
+		e->prev = current->prev;
+	else
+	{
+		e = current->prev;
+
+		if (e != nullptr)
+			e->next = nullptr;
+
+		last = e;
+	}
+
+	delete current;
+}

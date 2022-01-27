@@ -49,3 +49,12 @@ void EventsList::PushFront(DATA d)
 
 	first = e;
 }
+
+bool EventsList::GetData(DATA& d)
+{
+	if (current == nullptr)
+		return false;
+
+	d = current->data;
+	return true;
+}

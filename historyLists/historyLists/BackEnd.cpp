@@ -98,3 +98,12 @@ void EventsList::Remove()
 
 	delete current;
 }
+
+bool EventsList::Set(DATA d)
+{
+	if (current == nullptr)
+		return false;
+
+	current->data = d;
+	return true;
+}

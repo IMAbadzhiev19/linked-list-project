@@ -5,9 +5,9 @@ public:
 	struct DATA {
 		int year;
 		short month, day;
-		char subject[120];
-		char leader;
-		char place;
+		char subject[121];
+		char leader[31];
+		char place[31];
 	};
 
 	EventsList() : current(nullptr), first(nullptr), last(nullptr) {}
@@ -25,6 +25,13 @@ public:
 	void Remove();
 	void Erase();
 
+	DATA* Find(DATA d);
+	DATA* Find();
+
+	//Files
+	bool SaveToFile(std::string fileName);
+	bool LoadFromFile(std::string fileName);
+
 private:
 	struct ELEMENT {
 		ELEMENT* next, * prev;
@@ -32,4 +39,5 @@ private:
 	};
 
 	ELEMENT* first, * current, * last;
+	DATA dataToFind;
 };

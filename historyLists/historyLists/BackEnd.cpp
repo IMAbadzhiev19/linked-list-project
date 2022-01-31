@@ -1,4 +1,5 @@
 #include<iostream>
+#include<climits>
 
 #include"FrontEnd.h"
 #include"BackEnd.h"
@@ -106,4 +107,29 @@ bool EventsList::Set(DATA d)
 
 	current->data = d;
 	return true;
+}
+
+EventsList::DATA* EventsList::Find(DATA d)
+{
+	dataToFind = d;
+
+	for (current = first; current != nullptr; current = current->next)
+	{
+		if ((d.year != INT_MIN) && (d.year != current->data.year))
+			continue;
+		if ((d.month != 0) && (d.month != current->data.month))
+			continue;
+		if ((d.day != 0) && (d.day != current->data.day))
+			continue;
+		if ((d.subject[0] != 0) && (strcmp(d.subject, current->data.subject) != 0))
+			continue;
+		if ((d.leader[0] != 0) && (strcmp(d.leader, current->data.leader) != 0))
+			continue;
+		if ((d.place[0] != 0) && (strcmp(d.place, current->data.place) != 0))
+			continue;
+
+		return &(current->data); // an event meeting the creteria is found
+	}
+
+	return nullptr;
 }

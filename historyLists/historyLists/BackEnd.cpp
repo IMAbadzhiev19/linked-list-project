@@ -133,3 +133,29 @@ EventsList::DATA* EventsList::Find(DATA d)
 
 	return nullptr;
 }
+
+EventsList::DATA* EventsList::Find()
+{
+	if (current == nullptr)
+		return nullptr;
+
+	for (current = current->next; current != nullptr; current = current->next)
+	{
+		if ((dataToFind.year != INT_MIN) && (dataToFind.year != current->data.year))
+			continue;
+		if ((dataToFind.month != 0) && (dataToFind.month != current->data.month))
+			continue;
+		if ((dataToFind.day != 0) && (dataToFind.day != current->data.day))
+			continue;
+		if ((dataToFind.subject[0] != 0) && (strcmp(dataToFind.subject, current->data.subject) != 0))
+			continue;
+		if ((dataToFind.leader[0] != 0) && (strcmp(dataToFind.leader, current->data.leader) != 0))
+			continue;
+		if ((dataToFind.place[0] != 0) && (strcmp(dataToFind.place, current->data.place) != 0))
+			continue;
+
+		return &(current->data); // an event meeting the creteria is found
+	}
+
+	return nullptr;
+}

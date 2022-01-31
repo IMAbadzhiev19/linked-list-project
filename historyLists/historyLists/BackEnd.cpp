@@ -32,6 +32,8 @@ void EventsList::PushBack(DATA d)
 
 	if (first == nullptr) //checks if we add an element in an empty list
 		first = e; //if true -> the new element becomes first in the list
+	else
+		last->next = e;
 
 	last = e; //the new element becomes the last in the list
 }
@@ -46,6 +48,8 @@ void EventsList::PushFront(DATA d)
 
 	if (last == nullptr)
 		last = e;
+	else
+		last->prev = e;
 
 	first = e;
 }

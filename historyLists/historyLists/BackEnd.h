@@ -18,10 +18,10 @@ public:
 	bool MoveToNext();
 	bool MoveToPrev();
 	bool GetData(DATA& d);
+	bool Set(DATA d);
 
 	void PushBack(DATA d);
 	void PushFront(DATA d);
-	void Set(DATA d);
 	void Remove();
 	void Erase();
 

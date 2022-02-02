@@ -1,15 +1,15 @@
 #include<iostream>
-#include<climits> //INT_MIN and INT_MAX
 #include<fstream>
+#include<climits>
 
-#include"FrontEnd.h"
 #include"BackEnd.h"
+#include"FrontEnd.h"
 
 using namespace std;
 
-bool EventsList::MoveToNext() 
+bool EventsList::MoveToNext()
 {
-	if ((current == nullptr) || (current->next == nullptr))
+	if (current == nullptr)
 		return false;
 
 	current = current->next;
@@ -18,7 +18,7 @@ bool EventsList::MoveToNext()
 
 bool EventsList::MoveToPrev()
 {
-	if ((current == nullptr) || (current->prev == nullptr))
+	if (current == nullptr)
 		return false;
 
 	current = current->prev;
@@ -28,23 +28,22 @@ bool EventsList::MoveToPrev()
 void EventsList::PushBack(DATA d)
 {
 	ELEMENT* e = new ELEMENT;
-	e->data = d; //copy the data
-	e->prev = last; // The previous element becomes last in the list
-	e->next = nullptr; // The new element becomes last in the list
+	e->data = d; // copying the data
+	e->prev = last; // The previous element becomes the last
+	e->next = nullptr; // The new element becomes the last
 
-	if (first == nullptr) //checks if we add an element in an empty list
-		first = e; //if true -> the new element becomes first in the list
+	if (first == nullptr) // checks if we add element in empty list
+		first = e; // the new elements become first in the list
 	else
 		last->next = e;
 
-	last = e; //the new element becomes the last in the list
+	last = e; // the new element is the last
 }
 
 void EventsList::PushFront(DATA d)
 {
 	ELEMENT* e = new ELEMENT;
 	e->data = d;
-
 	e->prev = nullptr;
 	e->next = first;
 
@@ -70,9 +69,10 @@ void EventsList::Remove()
 	if (current == nullptr)
 		return;
 
-	ELEMENT* e = current->prev; //points to the element which is previous to the deleted
+	ELEMENT* e;
+	e = current->prev; // point to the element which is previous to the deleted
 
-	if (e != nullptr) // checks if the deleted element has a previous one (if it isn't first)
+	if (e != nullptr) // checks if the deleted element has a previous one (isn't first)
 		e->next = current->next;
 	else
 	{
@@ -98,7 +98,10 @@ void EventsList::Remove()
 		last = e;
 	}
 
-	delete current;
+	e = current;
+	current = (current->next != nullptr) ? current->next : current->prev;
+
+	delete e;
 }
 
 bool EventsList::Set(DATA d)
@@ -107,6 +110,58 @@ bool EventsList::Set(DATA d)
 		return false;
 
 	current->data = d;
+	return true;
+}
+
+void EventsList::EraseList()
+{
+	ELEMENT* e;
+
+	for (current = first; current != nullptr; current = e)
+	{
+		e = current->next;
+		delete current;
+	}
+
+	first = nullptr;
+	last = nullptr;
+}
+
+bool EventsList::SaveToFile(string fileName)
+{
+	ofstream file;
+	file.open(fileName, ios::out | ios::binary);
+
+	if (file.fail())
+		return false;
+
+	for (ELEMENT* e = first; e != nullptr; e = e->next)
+		file.write((char*)&(e->data), sizeof(DATA));
+
+	file.close();
+	return true;
+}
+
+bool EventsList::LoadFromFile(string fileName)
+{
+	ifstream f;
+	DATA d;
+
+	f.open(fileName, ios::in | ios::binary);
+	if (f.fail())
+		return false;
+
+	EraseList();
+	while (true)
+	{
+		f.read((char*)&d, sizeof(DATA));
+		if (f.eof())
+			break;
+
+		PushBack(d);
+	}
+
+	f.close();
 	return true;
 }
 
@@ -159,43 +214,4 @@ EventsList::DATA* EventsList::Find()
 	}
 
 	return nullptr;
-}
-
-bool EventsList::SaveToFile(string fileName)
-{
-	ofstream file;
-	file.open(fileName, ios::out | ios::binary);
-
-	if (file.fail())
-		return false;
-
-	for (ELEMENT* e = first; e != nullptr; e = e->next)
-		file.write((char*)&(e->data), sizeof(DATA));
-
-	file.close();
-	return true;
-}
-
-bool EventsList::LoadFromFile(string fileName)
-{
-	ifstream file;
-	DATA d;
-
-	file.open(fileName, ios::in | ios::binary);
-	if (file.fail())
-		return false;
-
-	EraseList();
-	while (true)
-	{
-		file.read((char*)&d, sizeof(DATA));
-
-		if (file.eof())
-			break;
-
-		PushBack(d);
-	}
-
-	file.close();
-	return true;
 }

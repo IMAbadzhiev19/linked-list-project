@@ -10,11 +10,11 @@ public:
 		char place[31];
 	};
 
-	EventsList() : current(nullptr), first(nullptr), last(nullptr) {}
+	EventsList() : current(nullptr), first(nullptr), last(nullptr) { memset(&dataToFind, 0, sizeof(dataToFind)); }
 	~EventsList() { EraseList(); }
-	
-	bool MoveToFirst() { current = first; }
-	bool MoveToLast() { current = last; }
+
+	void MoveToFirst() { current = first; }
+	void MoveToLast() { current = last; }
 	bool MoveToNext();
 	bool MoveToPrev();
 	bool GetData(DATA& d);
@@ -22,8 +22,8 @@ public:
 
 	void PushBack(DATA d);
 	void PushFront(DATA d);
-	void Remove();
 	void EraseList();
+	void Remove();
 
 	DATA* Find(DATA d);
 	DATA* Find();
@@ -38,6 +38,6 @@ private:
 		DATA data;
 	};
 
-	ELEMENT* first, * current, * last;
 	DATA dataToFind;
+	ELEMENT* current, * first, * last;
 };

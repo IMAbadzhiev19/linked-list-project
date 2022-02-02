@@ -1,5 +1,6 @@
 #include<iostream>
-#include<climits>
+#include<climits> //INT_MIN and INT_MAX
+#include<fstream>
 
 #include"FrontEnd.h"
 #include"BackEnd.h"
@@ -158,4 +159,19 @@ EventsList::DATA* EventsList::Find()
 	}
 
 	return nullptr;
+}
+
+bool EventsList::SaveToFile(string fileName)
+{
+	ofstream file;
+	file.open(fileName, ios::out | ios::binary);
+
+	if (file.fail())
+		return false;
+
+	for (ELEMENT* e = first; e != nullptr; e = e->next)
+		file.write((char*)&(e->data), sizeof(DATA));
+
+	file.close();
+	return true;
 }

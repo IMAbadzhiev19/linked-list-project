@@ -11,7 +11,7 @@ public:
 	};
 
 	EventsList() : current(nullptr), first(nullptr), last(nullptr) {}
-	~EventsList() { Erase(); }
+	~EventsList() { EraseList(); }
 	
 	bool MoveToFirst() { current = first; }
 	bool MoveToLast() { current = last; }
@@ -23,7 +23,7 @@ public:
 	void PushBack(DATA d);
 	void PushFront(DATA d);
 	void Remove();
-	void Erase();
+	void EraseList();
 
 	DATA* Find(DATA d);
 	DATA* Find();

@@ -175,3 +175,27 @@ bool EventsList::SaveToFile(string fileName)
 	file.close();
 	return true;
 }
+
+bool EventsList::LoadFromFile(string fileName)
+{
+	ifstream file;
+	DATA d;
+
+	file.open(fileName, ios::in | ios::binary);
+	if (file.fail())
+		return false;
+
+	EraseList();
+	while (true)
+	{
+		file.read((char*)&d, sizeof(DATA));
+
+		if (file.eof())
+			break;
+
+		PushBack(d);
+	}
+
+	file.close();
+	return true;
+}

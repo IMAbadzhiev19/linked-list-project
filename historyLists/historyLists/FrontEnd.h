@@ -8,7 +8,7 @@ public:
 	~Menu() { system("cls"); }
 
 	void clearScreen();
-	void gotoXY();
+	void gotoXY(int x, int y);
 
 	void displayOptions();
 	void displayList();

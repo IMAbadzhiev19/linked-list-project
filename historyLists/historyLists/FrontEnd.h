@@ -20,5 +20,5 @@ public:
 
 private:
 	EventsList list;
-	std::string fileName = "history";
+	std::string fileName = "history.txt";
 };

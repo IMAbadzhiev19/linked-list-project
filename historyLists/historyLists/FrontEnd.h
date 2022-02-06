@@ -13,12 +13,12 @@ public:
 	void displayOptions();
 	void displayList();
 	void pushBack();
-	void pusFront();
+	void pushFront();
 	void findEvents();
 	void changeInfo();
 	void deleteEvents();
 
 private:
 	EventsList list;
-	string fileName = "history";
+	std::string fileName = "history";
 };

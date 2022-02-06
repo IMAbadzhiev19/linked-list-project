@@ -128,7 +128,7 @@ void Menu::displayList()
 
 	while (list.GetData(data1) == true)
 	{
-		cout << data1.year << '-' << data1.month << '-' << data1.day << "  " << data1.subject << " " << data1.leader << " " << data1.place << endl;
+		cout << data1.year << '-' << data1.month << '-' << data1.day << " | " << data1.subject << " | " << data1.leader << " | " << data1.place << endl;
 		list.MoveToNext();
 	}
 }
@@ -181,7 +181,7 @@ void Menu::findEvents()
 	system("cls");
 	list.MoveToFirst();
 	for (dp = list.Find(data); dp != nullptr; dp = list.Find())
-		cout << dp->year << " " << dp->month << " " << dp->day << " " << dp->subject << " " << dp->leader << " " << dp->place << endl;
+		cout << dp->year << " " << dp->month << " " << dp->day << " | " << dp->subject << " | " << dp->leader << " | " << dp->place << endl;
 }
 
 void Menu::changeInfo()

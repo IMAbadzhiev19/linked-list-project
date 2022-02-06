@@ -77,7 +77,21 @@ void Menu::pushFront()
 
 void Menu::findEvents()
 {
+	EventsList::DATA data, * dp;
 
+	cout << "! (1)You can enter 0 if you want to ignore the date field !" << endl << "! (2)You can also enter an empty string if you want to ignore any of the fields below the date !" << endl << endl;
+
+	cout << "Please enter the year of the event: "; cin >> data.year;
+	cout << "Please enter the month of the event: "; cin >> data.month;
+	cout << "Please enter the day of the event: "; cin >> data.day; cin.ignore();
+	cout << "Please enter the name of the event: "; cin.getline(data.subject, sizeof(data.subject));
+	cout << "Please enter the leader of the event: "; cin.getline(data.leader, sizeof(data.leader));
+	cout << "Please enter the place where the event happened: "; cin.getline(data.place, sizeof(data.place));
+
+	system("cls");
+	list.MoveToFirst();
+	for (dp = list.Find(data); dp != nullptr; dp = list.Find())
+		cout << dp->year << " " << dp->month << " " << dp->day << " " << dp->subject << " " << dp->leader << " " << dp->place << endl;
 }
 
 void Menu::changeInfo()

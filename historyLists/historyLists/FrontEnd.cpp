@@ -45,12 +45,34 @@ void Menu::displayList()
 
 void Menu::pushBack()
 {
+	EventsList::DATA data;
 
+	cout << "! IF YOU DON'T KNOW OR DON'T WANT TO GIVE DETAILS ABOUT THE DATE -> TYPE \"0\" !" << endl << "! FOR SOMETHING BELOW THE DATE PRESS ENTER !" << endl << endl;
+
+	cout << "Please enter the year of the event: "; cin >> data.year;
+	cout << "Please enter the month of the event: "; cin >> data.month;
+	cout << "Please enter the day of the event: "; cin >> data.day; cin.ignore();
+	cout << "Please enter the name of the event: "; cin.getline(data.subject, sizeof(data.subject));
+	cout << "Please enter the leader of the event: "; cin.getline(data.leader, sizeof(data.leader));
+	cout << "Please enter the place where the event happened: "; cin.getline(data.place, sizeof(data.place));
+
+	list.PushBack(data);
 }
 
 void Menu::pushFront()
 {
+	EventsList::DATA data;
 
+	cout << "! IF YOU DON'T KNOW OR DON'T WANT TO GIVE DETAILS ABOUT THE DATE -> TYPE \"0\" !" << endl << "! FOR SOMETHING BELOW THE DATE PRESS ENTER !" << endl << endl;
+
+	cout << "Please enter the year of the event: "; cin >> data.year;
+	cout << "Please enter the month of the event: "; cin >> data.month;
+	cout << "Please enter the day of the event: "; cin >> data.day; cin.ignore();
+	cout << "Please enter the name of the event: "; cin.getline(data.subject, sizeof(data.subject));
+	cout << "Please enter the leader of the event: "; cin.getline(data.leader, sizeof(data.leader));
+	cout << "Please enter the place where the event happened: "; cin.getline(data.place, sizeof(data.place));
+
+	list.PushFront(data);
 }
 
 void Menu::findEvents()

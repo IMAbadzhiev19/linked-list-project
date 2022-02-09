@@ -11,26 +11,26 @@ public:
 	};
 
 	EventsList() : current(nullptr), first(nullptr), last(nullptr) { memset(&dataToFind, 0, sizeof(dataToFind)); }
-	~EventsList() { EraseList(); }
+	~EventsList() { eraseList(); }
 
-	void MoveToFirst() { current = first; }
-	void MoveToLast() { current = last; }
-	bool MoveToNext();
-	bool MoveToPrev();
-	bool GetData(DATA& d);
-	bool Set(DATA d);
+	void moveToFirst() { current = first; }
+	void moveToLast() { current = last; }
+	bool moveToNext();
+	bool moveToPrev();
+	bool getData(DATA& d);
+	bool set(DATA d);
 
-	void PushBack(DATA d);
-	void PushFront(DATA d);
-	void EraseList();
-	void Remove();
+	void pushBack(DATA d);
+	void pushFront(DATA d);
+	void eraseList();
+	void remove();
 
-	DATA* Find(DATA d);
-	DATA* Find();
+	DATA* find(DATA d);
+	DATA* find();
 
 	//Files
-	bool SaveToFile(std::string fileName);
-	bool LoadFromFile(std::string fileName);
+	bool saveToFile(std::string fileName);
+	bool loadFromFile(std::string fileName);
 
 private:
 	struct ELEMENT {

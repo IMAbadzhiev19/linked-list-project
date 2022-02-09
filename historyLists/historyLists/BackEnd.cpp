@@ -7,7 +7,7 @@
 
 using namespace std;
 
-bool EventsList::MoveToNext()
+bool EventsList::moveToNext()
 {
 	if (current == nullptr)
 		return false;
@@ -16,7 +16,7 @@ bool EventsList::MoveToNext()
 	return true;
 }
 
-bool EventsList::MoveToPrev()
+bool EventsList::moveToPrev()
 {
 	if (current == nullptr)
 		return false;
@@ -25,7 +25,7 @@ bool EventsList::MoveToPrev()
 	return true;
 }
 
-void EventsList::PushBack(DATA d)
+void EventsList::pushBack(DATA d)
 {
 	ELEMENT* e = new ELEMENT;
 	e->data = d; // copying the data
@@ -40,7 +40,7 @@ void EventsList::PushBack(DATA d)
 	last = e; // the new element is the last
 }
 
-void EventsList::PushFront(DATA d)
+void EventsList::pushFront(DATA d)
 {
 	ELEMENT* e = new ELEMENT;
 	e->data = d;
@@ -55,7 +55,7 @@ void EventsList::PushFront(DATA d)
 	first = e;
 }
 
-bool EventsList::GetData(DATA& d)
+bool EventsList::getData(DATA& d)
 {
 	if (current == nullptr)
 		return false;
@@ -64,7 +64,7 @@ bool EventsList::GetData(DATA& d)
 	return true;
 }
 
-void EventsList::Remove()
+void EventsList::remove()
 {
 	if (current == nullptr)
 		return;
@@ -104,7 +104,7 @@ void EventsList::Remove()
 	delete e;
 }
 
-bool EventsList::Set(DATA d)
+bool EventsList::set(DATA d)
 {
 	if (current == nullptr)
 		return false;
@@ -113,7 +113,7 @@ bool EventsList::Set(DATA d)
 	return true;
 }
 
-void EventsList::EraseList()
+void EventsList::eraseList()
 {
 	ELEMENT* e;
 
@@ -127,7 +127,7 @@ void EventsList::EraseList()
 	last = nullptr;
 }
 
-bool EventsList::SaveToFile(string fileName)
+bool EventsList::saveToFile(string fileName)
 {
 	ofstream file;
 	file.open(fileName, ios::out | ios::binary);
@@ -142,7 +142,7 @@ bool EventsList::SaveToFile(string fileName)
 	return true;
 }
 
-bool EventsList::LoadFromFile(string fileName)
+bool EventsList::loadFromFile(string fileName)
 {
 	ifstream f;
 	DATA d;
@@ -165,7 +165,7 @@ bool EventsList::LoadFromFile(string fileName)
 	return true;
 }
 
-EventsList::DATA* EventsList::Find(DATA d)
+EventsList::DATA* EventsList::find(DATA d)
 {
 	dataToFind = d;
 
@@ -190,7 +190,7 @@ EventsList::DATA* EventsList::Find(DATA d)
 	return nullptr;
 }
 
-EventsList::DATA* EventsList::Find()
+EventsList::DATA* EventsList::find()
 {
 	if (current == nullptr)
 		return nullptr;

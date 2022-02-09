@@ -81,7 +81,7 @@ void Menu::displayOptions()
 
 			case 0:
 			{
-				list.LoadFromFile(fileName);
+				list.loadFromFile(fileName);
 				displayList();
 
 				system("pause>nul");
@@ -90,18 +90,18 @@ void Menu::displayOptions()
 			case 1:
 			{
 				pushBack();
-				list.SaveToFile(fileName);
+				list.saveToFile(fileName);
 			}break;
 
 			case 2:
 			{
 				pushFront();
-				list.SaveToFile(fileName);
+				list.saveToFile(fileName);
 			}break;
 
 			case 3:
 			{
-				list.LoadFromFile(fileName);
+				list.loadFromFile(fileName);
 				findEvents();
 				system("pause>nul");
 			}break;
@@ -124,12 +124,12 @@ void Menu::displayOptions()
 void Menu::displayList()
 {
 	EventsList::DATA data1;
-	list.MoveToFirst();
+	list.moveToFirst();
 
-	while (list.GetData(data1) == true)
+	while (list.getData(data1) == true)
 	{
 		cout << data1.year << '-' << data1.month << '-' << data1.day << " | " << data1.subject << " | " << data1.leader << " | " << data1.place << endl;
-		list.MoveToNext();
+		list.moveToNext();
 	}
 }
 
@@ -146,7 +146,7 @@ void Menu::pushBack()
 	cout << "Please enter the leader of the event: "; cin.getline(data.leader, sizeof(data.leader));
 	cout << "Please enter the place where the event happened: "; cin.getline(data.place, sizeof(data.place));
 
-	list.PushBack(data);
+	list.pushBack(data);
 }
 
 void Menu::pushFront()
@@ -162,7 +162,7 @@ void Menu::pushFront()
 	cout << "Please enter the leader of the event: "; cin.getline(data.leader, sizeof(data.leader));
 	cout << "Please enter the place where the event happened: "; cin.getline(data.place, sizeof(data.place));
 
-	list.PushFront(data);
+	list.pushFront(data);
 }
 
 void Menu::findEvents()
@@ -179,8 +179,8 @@ void Menu::findEvents()
 	cout << "Please enter the place where the event happened: "; cin.getline(data.place, sizeof(data.place));
 
 	system("cls");
-	list.MoveToFirst();
-	for (dp = list.Find(data); dp != nullptr; dp = list.Find())
+	list.moveToFirst();
+	for (dp = list.find(data); dp != nullptr; dp = list.find())
 		cout << dp->year << " " << dp->month << " " << dp->day << " | " << dp->subject << " | " << dp->leader << " | " << dp->place << endl;
 }
 

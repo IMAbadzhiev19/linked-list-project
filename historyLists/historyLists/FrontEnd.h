@@ -4,7 +4,7 @@
 class Menu
 {
 public:
-	Menu() { list.LoadFromFile(fileName); }
+	Menu() { list.loadFromFile(fileName); }
 	~Menu() { system("cls"); }
 
 	void clearScreen();

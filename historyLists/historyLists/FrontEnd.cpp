@@ -170,7 +170,28 @@ void Menu::displayList()
 
 	while (list.getData(data1) == true)
 	{
-		cout << data1.year << '-' << data1.month << '-' << data1.day << " | " << data1.subject << " | " << data1.leader << " | " << data1.place << endl;
+		cout << data1.year << "." << data1.month << '.' << data1.day << " |Subject - ";
+
+		if (strlen(data1.subject) == 0)
+			cout << "Unknown";
+		else
+			cout << data1.subject;
+
+		cout << " |Leader - ";
+
+		if (strlen(data1.leader) == 0)
+			cout << "Unknown";
+		else
+			cout << data1.leader;
+
+		cout << " |Place - ";
+
+		if (strlen(data1.place) == 0)
+			cout << "Unknown";
+		else
+			cout << data1.place;
+
+		cout << endl;
 		list.moveToNext();
 	}
 }

@@ -430,8 +430,14 @@ void Menu::Login()
 					}
 				}
 				else if (info == 2)
-					if (password == temp)
+				{
+					string bin = decToBin(password[0]);
+					string bin1 = decToBin(password[password.size() - 1]);
+					string result = (binaryToGray(bin) + password.substr(1, password.size() - 2) + binaryToGray(bin1));
+
+					if (result == temp)
 						checks++;
+				}
 
 
 			} while (!fi.eof());

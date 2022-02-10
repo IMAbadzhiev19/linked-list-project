@@ -444,3 +444,19 @@ void Menu::Login()
 
 	displayOptions();
 }
+
+//Gray's algorithm
+string Menu::decToBin(int n)
+{
+	string bin;
+
+	while (n != 0)
+	{
+		bin += to_string(n % 2);
+		n /= 2;
+	}
+
+	reverse(bin.begin(), bin.end());
+
+	return bin;
+}

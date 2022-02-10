@@ -330,11 +330,11 @@ void Menu::SignUp()
 		cout << "|         -> "; getline(cin, username); std::cout << "\033[F";
 		cout << "|          Password:         |" << endl;
 		cout << "|         -> "; getline(cin, pass);  std::cout << "\033[F";
-		cout << "|       Confirm Password:      |" << endl;
+		cout << "|       Confirm Password:    |" << endl;
 		cout << "|         -> "; getline(cin, repeated_pass);  std::cout << "\033[F";
 		cout << " ---------------------------- " << endl;
 
-		if (pass.compare(repeated_pass) == true && username != "" && pass != "")
+		if (pass == repeated_pass && username != "" && pass != "")
 			flag = true;
 		else
 		{
@@ -399,7 +399,7 @@ void Menu::Login()
 
 				if (info == 1)
 				{
-					if (name.compare(temp) == true)
+					if (name == temp)
 					{
 						checks++;
 						info++;

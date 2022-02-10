@@ -375,12 +375,15 @@ void Menu::SignUp()
 	}
 	else {
 		fo << username << endl;
-		fo << pass << endl;
+
+		string bin = decToBin(pass[0]);
+		string bin1 = decToBin(pass[pass.size() - 1]);
+		fo << (binaryToGray(bin) + pass.substr(1, pass.size() - 2) + binaryToGray(bin1)) << endl;
 	}
 
 	system("cls");
 	cout << "YOU ARE ALL DONE, NOW WE ARE REDIRECTING YOU TO THE LOGIN PAGE";
-	
+
 	Sleep(2000);
 	system("cls");
 	Login();

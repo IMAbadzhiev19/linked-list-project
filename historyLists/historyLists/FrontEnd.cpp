@@ -32,9 +32,12 @@ void Menu::gotoXY(int x, int y)
 //Menu options
 void Menu::displayOptions()
 {
-	unsigned short y = 14, choice = 0;
+	system("cls");
 
-	while (true)
+	bool here2 = true;
+	int y = 14, choice = 0;
+
+	while (here2 == true)
 	{
 		gotoXY(0, 0); cout << "*--------------------------------------------------------------*" << endl;
 		gotoXY(0, 1); cout << ":                                                              :" << endl;
@@ -49,16 +52,18 @@ void Menu::displayOptions()
 		gotoXY(0, 10); cout << ":                                                              :" << endl;
 		gotoXY(0, 11); cout << "*--------------------------------------------------------------*" << endl;
 
+
 		gotoXY(25, 14); cout << "Display List";
 		gotoXY(25, 15); cout << "Push to the end";
 		gotoXY(25, 16); cout << "Push to the front";
 		gotoXY(25, 17); cout << "Find event(s)";
 		gotoXY(25, 18); cout << "Change event's info";
-		gotoXY(25, 19); cout << "Delete event(s)" << endl;
+		gotoXY(25, 19); cout << "Delete event(s)\n";
+		gotoXY(25, 20); cout << "Go Back\n";
 
 		system("pause>nul");
 
-		if (GetAsyncKeyState(VK_DOWN) && y != 19)
+		if (GetAsyncKeyState(VK_DOWN) && y != 20)
 		{
 			gotoXY(22, y); cout << "  ";
 			y++;
@@ -76,50 +81,83 @@ void Menu::displayOptions()
 			continue;
 		}
 
+
 		if (GetAsyncKeyState(VK_RETURN))
 		{
 			system("cls");
 
 			switch (choice)
 			{
-
 			case 0:
 			{
-				list.loadFromFile(fileName);
-				displayList();
+				if (name == "")
+				{
+					cout << "You must be logged into your account to use this benefits";
+					Sleep(1500);
+					displaySigninOptions();
+				}
+				else {
+					list.loadFromFile(name + "-data");
+					displayList();
 
-				system("pause>nul");
-			}break;
-
+					system("pause>nul");
+					system("cls");
+				}
+			} break;
 			case 1:
 			{
-				pushBack();
-				list.saveToFile(fileName);
-			}break;
-
+				if (name == "")
+				{
+					cout << "You must be logged into your account to use this benefits";
+					Sleep(1500);
+					displaySigninOptions();
+				}
+				{
+					pushBack();
+					list.saveToFile(name + "-data");
+				}
+			} break;
 			case 2:
 			{
-				pushFront();
-				list.saveToFile(fileName);
-			}break;
-
+				if (name == "")
+				{
+					cout << "You must be logged into your account to use this benefits";
+					Sleep(1500);
+					displaySigninOptions();
+				}
+				{
+					pushFront();
+					list.saveToFile(name + "-data");
+				}
+			} break;
 			case 3:
 			{
-				list.loadFromFile(fileName);
-				findEvents();
-				system("pause>nul");
-			}break;
-
+				if (name == "")
+				{
+					cout << "You must be logged into your account to use this benefits";
+					Sleep(1500);
+					displaySigninOptions();
+				}
+				else
+				{
+					list.loadFromFile(name + "-data");
+					findEvents();
+					system("pause>nul");
+					system("cls");
+				}
+			} break;
 			case 4:
 			{
 
-			}break;
-
+			} break;
 			case 5:
 			{
 
+			} break;
+			case 6:
+			{
+				displaySigninOptions();
 			}break;
-
 			} //switch
 		}
 	}

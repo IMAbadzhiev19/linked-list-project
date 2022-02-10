@@ -460,3 +460,20 @@ string Menu::decToBin(int n)
 
 	return bin;
 }
+
+string Menu::grayToBinary(string gray)
+{
+
+}
+
+string Menu::binaryToGray(string bin)
+{
+	string gray = "";
+
+	gray += bin[0];
+
+	for (int i = 1; i < bin.length(); i++)
+		gray += xor_func(bin[i - 1], bin[i]);
+
+	return gray;
+}

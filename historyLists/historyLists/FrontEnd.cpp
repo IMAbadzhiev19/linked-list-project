@@ -1,5 +1,7 @@
 #include<iostream>
+#include<string>
 #include<windows.h>
+#include<fstream>
 
 #include"FrontEnd.h"
 #include"BackEnd.h"
@@ -273,4 +275,54 @@ void Menu::displaySigninOptions()
 			}
 		}
 	}
+}
+
+void Menu::SignUp()
+{
+	string username, pass, repeated_pass;
+	bool flag = false;
+
+	while (flag != true)
+	{
+		system("cls");
+
+		cout << "         -- SIGNIN --         " << endl;
+		cout << " ---------------------------- " << endl;
+		cout << "|          Username:         |" << endl;
+		cout << "|         -> "; getline(cin, username); std::cout << "\033[F";
+		cout << "|          Password:         |" << endl;
+		cout << "|         -> "; getline(cin, pass);  std::cout << "\033[F";
+		cout << "|       Confirm Password:      |" << endl;
+		cout << "|         -> "; getline(cin, repeated_pass);  std::cout << "\033[F";
+		cout << " ---------------------------- " << endl;
+
+		if (pass.compare(repeated_pass) == true)
+			flag = true;
+		else
+		{
+			system("cls");
+			cout << "                         REPEATED PASSWORD DOESN'T MATCH THE ORIGINAL" << endl;
+			Sleep(1000);
+		}
+	}
+
+	ofstream fo;
+	fo.open(username, ios::out);
+
+	if (fo.fail()) {
+		cout << "WRONG INFORMATION" << endl;
+		Sleep(1000);
+		displaySigninOptions();
+	}
+	else {
+		fo << username << endl;
+		fo << pass << endl;
+	}
+
+	system("cls");
+	cout << "YOU ARE ALL DONE, NOW WE ARE REDIRECTING YOU TO THE LOGIN PAGE";
+	
+	Sleep(2000);
+	system("cls");
+	Login();
 }

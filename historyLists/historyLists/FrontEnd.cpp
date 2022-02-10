@@ -463,7 +463,19 @@ string Menu::decToBin(int n)
 
 string Menu::grayToBinary(string gray)
 {
+	string binary = "";
 
+	binary += gray[0];
+
+	for (int i = 1; i < gray.length(); i++) {
+		if (gray[i] == '0')
+			binary += binary[i - 1];
+
+		else
+			binary += flip(binary[i - 1]);
+	}
+
+	return binary;
 }
 
 string Menu::binaryToGray(string bin)

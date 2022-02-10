@@ -296,7 +296,7 @@ void Menu::SignUp()
 		cout << "|         -> "; getline(cin, repeated_pass);  std::cout << "\033[F";
 		cout << " ---------------------------- " << endl;
 
-		if (pass.compare(repeated_pass) == true)
+		if (pass.compare(repeated_pass) == true && username != "" && pass != "")
 			flag = true;
 		else
 		{
@@ -325,4 +325,63 @@ void Menu::SignUp()
 	Sleep(2000);
 	system("cls");
 	Login();
+}
+
+void Menu::Login()
+{
+	string password, temp;
+	bool flag = false;
+	int checks, info;
+
+	while (flag != true)
+	{
+		system("cls");
+
+		checks = 0; info = 1;
+
+		cout << "      -- LOGIN --       " << endl;
+		cout << " ---------------------- " << endl;
+		cout << "|       Username:      |" << endl;
+		cout << "|     -> "; getline(cin, name); std::cout << "\033[F";
+		cout << "|       Password:      |" << endl;
+		cout << "|     -> "; getline(cin, password);  std::cout << "\033[F";
+		cout << " ---------------------- " << endl;
+
+		ifstream fi;
+		fi.open(name, ios::in);
+
+		if (fi.fail()) {
+			system("cls");
+			cout << "Username doesn't match!" << endl;
+			Sleep(1500);
+		}
+		else {
+			do {
+				getline(fi, temp);
+
+				if (info == 1)
+				{
+					if (name.compare(temp) == true)
+					{
+						checks++;
+						info++;
+					}
+				}
+				else if (info == 2)
+					if (password == temp)
+						checks++;
+
+
+			} while (!fi.eof());
+		}
+		if (checks == 2 && password != "")
+			flag = true;
+		else {
+			system("cls");
+			cout << "Password doesn't match" << endl;
+			Sleep(1000);
+		}
+	}
+
+	displayOptions();
 }

@@ -21,5 +21,5 @@ public:
 
 private:
 	EventsList list;
-	std::string fileName;
+	std::string name;
 };

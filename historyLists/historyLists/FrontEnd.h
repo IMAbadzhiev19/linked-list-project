@@ -4,11 +4,12 @@
 class Menu
 {
 public:
-	Menu() { list.loadFromFile(fileName); }
-	~Menu() { system("cls"); }
-
 	void clearScreen();
 	void gotoXY(int x, int y);
+
+	void Login();
+	void SignUp();
+	void displaySigninOptions();
 
 	void displayOptions();
 	void displayList();
@@ -20,5 +21,5 @@ public:
 
 private:
 	EventsList list;
-	std::string fileName = "history.txt";
+	std::string fileName;
 };

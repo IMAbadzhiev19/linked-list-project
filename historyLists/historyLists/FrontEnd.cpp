@@ -6,6 +6,7 @@
 
 using namespace std;
 
+//Used for the cursor
 void Menu::clearScreen()
 {
 	COORD cursor;
@@ -26,6 +27,7 @@ void Menu::gotoXY(int x, int y)
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coords);
 }
 
+//Menu options
 void Menu::displayOptions()
 {
 	unsigned short y = 14, choice = 0;
@@ -192,4 +194,83 @@ void Menu::changeInfo()
 void Menu::deleteEvents()
 {
 
+}
+
+//Account
+void Menu::displaySigninOptions()
+{
+	system("cls");
+
+	bool here2 = true;
+	int y = 14, choice = 0;
+
+	while (here2 == true)
+	{
+		gotoXY(0, 0); cout << "*--------------------------------------------------------------*" << endl;
+		gotoXY(0, 1); cout << ":                                                              :" << endl;
+		gotoXY(0, 2); cout << ":  _______  _______  _______  ___   _______  __    _  _______  :" << endl;
+		gotoXY(0, 3); cout << ": |       ||       ||       ||   | |       ||  |  | ||       | :" << endl;
+		gotoXY(0, 4); cout << ": |   _   ||    _  ||_     _||   | |   _   ||   |_| ||  _____| :" << endl;
+		gotoXY(0, 5); cout << ": |  | |  ||   |_| |  |   |  |   | |  | |  ||       || |_____  :" << endl;
+		gotoXY(0, 6); cout << ": |  |_|  ||    ___|  |   |  |   | |  |_|  ||  _    ||_____  | :" << endl;
+		gotoXY(0, 7); cout << ": |       ||   |      |   |  |   | |       || | |   | _____| | :" << endl;
+		gotoXY(0, 8); cout << ": |_______||___|      |___|  |___| |_______||_|  |__||_______| :" << endl;
+		gotoXY(0, 9); cout << ":                                                              :" << endl;
+		gotoXY(0, 10); cout << ":                                                              :" << endl;
+		gotoXY(0, 11); cout << "*--------------------------------------------------------------*" << endl;
+
+
+		gotoXY(25, 14); cout << "Login\n";
+		gotoXY(25, 15); cout << "Sign in\n";
+		gotoXY(25, 16); cout << "List options\n";
+		gotoXY(25, 17); cout << "Quit";
+
+		system("pause>nul");
+
+		if (GetAsyncKeyState(VK_DOWN) && y != 17)
+		{
+			gotoXY(22, y); cout << "  ";
+			y++;
+			gotoXY(22, y); cout << "-> ";
+			choice++;
+			continue;
+		}
+
+		if (GetAsyncKeyState(VK_UP) && y != 14)
+		{
+			gotoXY(22, y); cout << "  ";
+			y--;
+			gotoXY(22, y); cout << "-> ";
+			choice--;
+			continue;
+		}
+
+
+		if (GetAsyncKeyState(VK_RETURN))
+		{
+			system("cls");
+
+			switch (choice)
+			{
+			case 0:
+			{
+				Login();
+			}break;
+			case 1:
+			{
+				SignUp();
+			}break;
+			case 2:
+			{
+				displayOptions();
+			} break;
+			case 3:
+			{
+				system("cls");
+				cout << "                                     YOU HAVE SUCCESSFULLY QUITED" << endl;
+				exit(0);
+			}break;
+			}
+		}
+	}
 }

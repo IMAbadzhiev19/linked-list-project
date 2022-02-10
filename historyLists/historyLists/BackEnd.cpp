@@ -151,14 +151,14 @@ bool EventsList::loadFromFile(string fileName)
 	if (f.fail())
 		return false;
 
-	EraseList();
+	eraseList();
 	while (true)
 	{
 		f.read((char*)&d, sizeof(DATA));
 		if (f.eof())
 			break;
 
-		PushBack(d);
+		pushBack(d);
 	}
 
 	f.close();

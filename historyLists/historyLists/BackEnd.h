@@ -32,6 +32,7 @@ public:
 
 	void moveToFirst() { current = first; }
 	void moveToLast() { current = last; }
+	void moveTo(ELEMENT* c) { current = c; }
 	bool moveToNext();
 	bool moveToPrev();
 	bool getData(DATA& d);

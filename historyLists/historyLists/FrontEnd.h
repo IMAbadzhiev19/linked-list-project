@@ -1,24 +1,35 @@
 #pragma once
+#include<conio.h>
+#include<windows.h>
+
 #include"BackEnd.h"
 
 class Menu
 {
 public:
-	Menu() { list.LoadFromFile(fileName); }
-	~Menu() { system("cls"); }
-
 	void clearScreen();
 	void gotoXY(int x, int y);
+
+	void Login();
+	void SignUp();
+	void displaySigninOptions();
 
 	void displayOptions();
 	void displayList();
 	void pushBack();
-	void pusFront();
+	void pushFront();
 	void findEvents();
 	void changeInfo();
 	void deleteEvents();
 
+	//Used for gray's algorithm
+	std::string decToBin(int n);
+	char xor_func(char a, char b) { return (a == b) ? '0' : '1'; } //does xor operation
+	char flip(char c) { return (c == '0') ? '1' : '0'; } //changes the bits to the opposite one
+	std::string binaryToGray(std::string bin);
+
 private:
+	int GetPressedKey() { int key = _getch(); return ((key == 0) || (key == 224)) ? _getch() : key; }
 	EventsList list;
-	string fileName = "history";
+	std::string name;
 };

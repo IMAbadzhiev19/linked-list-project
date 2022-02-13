@@ -1,13 +1,11 @@
 #include<iostream>
-#include<fstream>
-#include<climits>
 
 #include"BackEnd.h"
 #include"FrontEnd.h"
 
 using namespace std;
 
-bool EventsList::MoveToNext()
+bool EventsList::moveToNext()
 {
 	if (current == nullptr)
 		return false;
@@ -16,7 +14,7 @@ bool EventsList::MoveToNext()
 	return true;
 }
 
-bool EventsList::MoveToPrev()
+bool EventsList::moveToPrev()
 {
 	if (current == nullptr)
 		return false;
@@ -25,7 +23,7 @@ bool EventsList::MoveToPrev()
 	return true;
 }
 
-void EventsList::PushBack(DATA d)
+void EventsList::pushBack(DATA d)
 {
 	ELEMENT* e = new ELEMENT;
 	e->data = d; // copying the data
@@ -40,7 +38,7 @@ void EventsList::PushBack(DATA d)
 	last = e; // the new element is the last
 }
 
-void EventsList::PushFront(DATA d)
+void EventsList::pushFront(DATA d)
 {
 	ELEMENT* e = new ELEMENT;
 	e->data = d;
@@ -55,7 +53,7 @@ void EventsList::PushFront(DATA d)
 	first = e;
 }
 
-bool EventsList::GetData(DATA& d)
+bool EventsList::getData(DATA& d)
 {
 	if (current == nullptr)
 		return false;
@@ -64,7 +62,7 @@ bool EventsList::GetData(DATA& d)
 	return true;
 }
 
-void EventsList::Remove()
+void EventsList::remove()
 {
 	if (current == nullptr)
 		return;
@@ -104,7 +102,7 @@ void EventsList::Remove()
 	delete e;
 }
 
-bool EventsList::Set(DATA d)
+bool EventsList::set(DATA d)
 {
 	if (current == nullptr)
 		return false;
@@ -113,7 +111,7 @@ bool EventsList::Set(DATA d)
 	return true;
 }
 
-void EventsList::EraseList()
+void EventsList::eraseList()
 {
 	ELEMENT* e;
 
@@ -127,7 +125,7 @@ void EventsList::EraseList()
 	last = nullptr;
 }
 
-bool EventsList::SaveToFile(string fileName)
+bool EventsList::saveToFile(string fileName)
 {
 	ofstream file;
 	file.open(fileName, ios::out | ios::binary);
@@ -142,7 +140,7 @@ bool EventsList::SaveToFile(string fileName)
 	return true;
 }
 
-bool EventsList::LoadFromFile(string fileName)
+bool EventsList::loadFromFile(string fileName)
 {
 	ifstream f;
 	DATA d;
@@ -151,32 +149,37 @@ bool EventsList::LoadFromFile(string fileName)
 	if (f.fail())
 		return false;
 
-	EraseList();
+	eraseList();
 	while (true)
 	{
 		f.read((char*)&d, sizeof(DATA));
 		if (f.eof())
 			break;
 
-		PushBack(d);
+		pushBack(d);
 	}
 
 	f.close();
 	return true;
 }
 
-EventsList::DATA* EventsList::Find(DATA d)
+EventsList::DATA* EventsList::find(DATA d)
 {
 	dataToFind = d;
+	foundAdrs.clear();
 
 	for (current = first; current != nullptr; current = current->next)
 	{
-		if ((d.year != INT_MIN) && (d.year != current->data.year))
+		if ((d.year != 0) && (d.year != current->data.year))
 			continue;
 		if ((d.month != 0) && (d.month != current->data.month))
 			continue;
 		if ((d.day != 0) && (d.day != current->data.day))
 			continue;
+
+		//cout << d.place << " " << current->data.place << " " << "length: " << strlen(d.place) << " " << strlen(current->data.place) << endl;
+		//system("pause");
+
 		if ((d.subject[0] != 0) && (strcmp(d.subject, current->data.subject) != 0))
 			continue;
 		if ((d.leader[0] != 0) && (strcmp(d.leader, current->data.leader) != 0))
@@ -184,20 +187,21 @@ EventsList::DATA* EventsList::Find(DATA d)
 		if ((d.place[0] != 0) && (strcmp(d.place, current->data.place) != 0))
 			continue;
 
+		foundAdrs.push_back(current);
 		return &(current->data); // an event meeting the creteria is found
 	}
 
 	return nullptr;
 }
 
-EventsList::DATA* EventsList::Find()
+EventsList::DATA* EventsList::find()
 {
 	if (current == nullptr)
 		return nullptr;
 
 	for (current = current->next; current != nullptr; current = current->next)
 	{
-		if ((dataToFind.year != INT_MIN) && (dataToFind.year != current->data.year))
+		if ((dataToFind.year != 0) && (dataToFind.year != current->data.year))
 			continue;
 		if ((dataToFind.month != 0) && (dataToFind.month != current->data.month))
 			continue;
@@ -210,8 +214,8 @@ EventsList::DATA* EventsList::Find()
 		if ((dataToFind.place[0] != 0) && (strcmp(dataToFind.place, current->data.place) != 0))
 			continue;
 
+		foundAdrs.push_back(current);
 		return &(current->data); // an event meeting the creteria is found
 	}
-
 	return nullptr;
 }

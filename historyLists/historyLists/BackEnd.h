@@ -19,8 +19,16 @@ public:
 		DATA data;
 	};
 
-	EventsList() : current(nullptr), first(nullptr), last(nullptr) { memset(&dataToFind, 0, sizeof(dataToFind)); }
-	~EventsList() { eraseList(); }
+	EventsList() : current(nullptr), first(nullptr), last(nullptr) 
+	{ 
+		memset(&dataToFind, 0, sizeof(dataToFind));
+		foundAdrs.clear();
+	}
+	~EventsList() 
+	{ 
+		eraseList(); 
+		foundAdrs.clear();
+	}
 
 	void moveToFirst() { current = first; }
 	void moveToLast() { current = last; }

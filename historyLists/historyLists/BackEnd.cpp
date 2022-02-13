@@ -169,7 +169,7 @@ EventsList::DATA* EventsList::find(DATA d)
 
 	for (current = first; current != nullptr; current = current->next)
 	{
-		if ((d.year != INT_MIN) && (d.year != current->data.year))
+		if ((d.year != 0) && (d.year != current->data.year))
 			continue;
 		if ((d.month != 0) && (d.month != current->data.month))
 			continue;
@@ -182,6 +182,7 @@ EventsList::DATA* EventsList::find(DATA d)
 		if ((d.place[0] != 0) && (strcmp(d.place, current->data.place) != 0))
 			continue;
 
+		foundAdrs.push_back(current);
 		return &(current->data); // an event meeting the creteria is found
 	}
 
@@ -195,7 +196,7 @@ EventsList::DATA* EventsList::find()
 
 	for (current = current->next; current != nullptr; current = current->next)
 	{
-		if ((dataToFind.year != INT_MIN) && (dataToFind.year != current->data.year))
+		if ((dataToFind.year != 0) && (dataToFind.year != current->data.year))
 			continue;
 		if ((dataToFind.month != 0) && (dataToFind.month != current->data.month))
 			continue;
@@ -208,6 +209,7 @@ EventsList::DATA* EventsList::find()
 		if ((dataToFind.place[0] != 0) && (strcmp(dataToFind.place, current->data.place) != 0))
 			continue;
 
+		foundAdrs.push_back(current);
 		return &(current->data); // an event meeting the creteria is found
 	}
 

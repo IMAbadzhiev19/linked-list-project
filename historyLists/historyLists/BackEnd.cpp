@@ -166,6 +166,7 @@ bool EventsList::loadFromFile(string fileName)
 EventsList::DATA* EventsList::find(DATA d)
 {
 	dataToFind = d;
+	foundAdrs.clear();
 
 	for (current = first; current != nullptr; current = current->next)
 	{
@@ -175,6 +176,10 @@ EventsList::DATA* EventsList::find(DATA d)
 			continue;
 		if ((d.day != 0) && (d.day != current->data.day))
 			continue;
+
+		//cout << d.place << " " << current->data.place << " " << "length: " << strlen(d.place) << " " << strlen(current->data.place) << endl;
+		//system("pause");
+
 		if ((d.subject[0] != 0) && (strcmp(d.subject, current->data.subject) != 0))
 			continue;
 		if ((d.leader[0] != 0) && (strcmp(d.leader, current->data.leader) != 0))
@@ -212,6 +217,5 @@ EventsList::DATA* EventsList::find()
 		foundAdrs.push_back(current);
 		return &(current->data); // an event meeting the creteria is found
 	}
-
 	return nullptr;
 }

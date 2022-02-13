@@ -5,7 +5,6 @@
 
 using namespace std;
 
-//Used for the cursor
 void Menu::clearScreen()
 {
 	COORD cursor;
@@ -178,6 +177,7 @@ void Menu::displayOptions()
 			case 6:
 			{
 				displaySigninOptions();
+				break;
 			}break;
 			} //switch
 		}
@@ -231,6 +231,7 @@ void Menu::pushBack()
 	cout << "Please enter the place where the event happened: "; cin.getline(data.place, sizeof(data.place));
 
 	list.pushBack(data);
+	system("cls");
 }
 
 void Menu::pushFront()
@@ -247,11 +248,12 @@ void Menu::pushFront()
 	cout << "Please enter the place where the event happened: "; cin.getline(data.place, sizeof(data.place));
 
 	list.pushFront(data);
+	system("cls");
 }
 
 void Menu::findEvents()
 {
-	EventsList::DATA data, * dp;
+	EventsList::DATA data{ 0, 0, 0, "", "", "" }, * dp;
 
 	cout << "! (1)You can enter 0 if you want to ignore the date field !" << endl << "! (2)You can also enter an empty string if you want to ignore any of the fields below the date !" << endl << endl;
 
@@ -265,7 +267,30 @@ void Menu::findEvents()
 	system("cls");
 	list.moveToFirst();
 	for (dp = list.find(data); dp != nullptr; dp = list.find())
-		cout << dp->year << " " << dp->month << " " << dp->day << " | " << dp->subject << " | " << dp->leader << " | " << dp->place << endl;
+	{
+		cout << dp->year << "." << dp->month << '.' << dp->day << " |Subject - ";
+
+		if (strlen(dp->subject) == 0)
+			cout << "Unknown";
+		else
+			cout << dp->subject;
+
+		cout << " |Leader - ";
+
+		if (strlen(dp->leader) == 0)
+			cout << "Unknown";
+		else
+			cout << dp->leader;
+
+		cout << " |Place - ";
+
+		if (strlen(dp->place) == 0)
+			cout << "Unknown";
+		else
+			cout << dp->place;
+
+		cout << endl;
+	}
 }
 
 void Menu::changeInfo()
@@ -389,7 +414,8 @@ void Menu::deleteEvents()
 
 			continue;
 		}
-		else if (GetAsyncKeyState(VK_UP) && (choice > 0))
+
+		if (GetAsyncKeyState(VK_UP) && (choice > 0))
 		{
 			gotoXY(1, y + choice); cout << "   ";
 			choice--;
@@ -397,14 +423,13 @@ void Menu::deleteEvents()
 
 			continue;
 		}
-		else if (GetAsyncKeyState(VK_RETURN))
+
+		if (GetAsyncKeyState(VK_RETURN))
 		{
 			system("cls");
 			break;
 		}
 	}
-
-	EventsList::DATA d{ 0, 0, 0, "", "", "" };
 
 	list.moveTo(list.foundAdrs[choice]);
 	list.remove();
@@ -493,7 +518,7 @@ void Menu::displaySigninOptions()
 
 void Menu::SignUp()
 {
-	string username, pass, repeated_pass;
+	string username, pass, repeated_pass, finalPassword;
 	bool flag = false;
 
 	while (flag != true)
@@ -510,7 +535,16 @@ void Menu::SignUp()
 		cout << "|         -> "; getline(cin, repeated_pass);  std::cout << "\033[F";
 		cout << " ---------------------------- " << endl;
 
-		if (pass == repeated_pass && username != "" && pass != "")
+		ifstream temp;
+		temp.open(username);
+
+		if (temp)
+		{
+			system("cls");
+			cout << "                         USERNAME ALREADY EXISTS" << endl;
+			Sleep(1000);
+		}
+		else if (pass == repeated_pass && username != "" && pass != "")
 			flag = true;
 		else
 		{
@@ -531,9 +565,13 @@ void Menu::SignUp()
 	else {
 		fo << username << endl;
 
-		string bin = decToBin(pass[0]);
-		string bin1 = decToBin(pass[pass.size() - 1]);
-		fo << (binaryToGray(bin) + pass.substr(1, pass.size() - 2) + binaryToGray(bin1)) << endl;
+		for (size_t i = 0; i < pass.size(); i++)
+		{
+			string bin = decToBin(pass[i]);
+			finalPassword += binaryToGray(bin);
+		}
+
+		fo << finalPassword << endl;
 	}
 
 	system("cls");
@@ -546,7 +584,7 @@ void Menu::SignUp()
 
 void Menu::Login()
 {
-	string password, temp;
+	string password, temp, result;
 	bool flag = false;
 	int checks, info;
 
@@ -586,9 +624,11 @@ void Menu::Login()
 				}
 				else if (info == 2)
 				{
-					string bin = decToBin(password[0]);
-					string bin1 = decToBin(password[password.size() - 1]);
-					string result = (binaryToGray(bin) + password.substr(1, password.size() - 2) + binaryToGray(bin1));
+					for (size_t i = 0; i < password.size(); i++)
+					{
+						string bin = decToBin(password[i]);
+						result += binaryToGray(bin);
+					}
 
 					if (result == temp)
 						checks++;
@@ -623,23 +663,6 @@ string Menu::decToBin(int n)
 	reverse(bin.begin(), bin.end());
 
 	return bin;
-}
-
-string Menu::grayToBinary(string gray)
-{
-	string binary = "";
-
-	binary += gray[0];
-
-	for (int i = 1; i < gray.length(); i++) {
-		if (gray[i] == '0')
-			binary += binary[i - 1];
-
-		else
-			binary += flip(binary[i - 1]);
-	}
-
-	return binary;
 }
 
 string Menu::binaryToGray(string bin)

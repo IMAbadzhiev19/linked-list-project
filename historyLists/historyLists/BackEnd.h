@@ -4,6 +4,7 @@
 #include<climits>
 #include<string>
 
+
 class EventsList {
 public:
 	struct DATA {
@@ -19,14 +20,15 @@ public:
 		DATA data;
 	};
 
-	EventsList() : current(nullptr), first(nullptr), last(nullptr) 
-	{ 
+	EventsList() : current(nullptr), first(nullptr), last(nullptr)
+	{
 		memset(&dataToFind, 0, sizeof(dataToFind));
 		foundAdrs.clear();
 	}
-	~EventsList() 
-	{ 
-		eraseList(); 
+
+	~EventsList()
+	{
+		eraseList();
 		foundAdrs.clear();
 	}
 
@@ -40,8 +42,8 @@ public:
 
 	void pushBack(DATA d);
 	void pushFront(DATA d);
-	void eraseList();
-	void remove();
+	void eraseList(); //Erases the whole list
+	void remove(); //Removes specific element
 
 	DATA* find(DATA d);
 	DATA* find();
@@ -50,9 +52,9 @@ public:
 	bool saveToFile(std::string fileName);
 	bool loadFromFile(std::string fileName);
 
-	std::vector<ELEMENT*> foundAdrs; //Stores the addresses of the found events
+	std::vector<ELEMENT*> foundAdrs; //The vector is used to store all addresses of finded elements
 
 private:
-	DATA dataToFind;
 	ELEMENT* current, * first, * last;
+	DATA dataToFind;
 };

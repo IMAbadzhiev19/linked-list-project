@@ -29,7 +29,6 @@ public:
 	std::string binaryToGray(std::string bin);
 
 private:
-	int GetPressedKey() { int key = _getch(); return ((key == 0) || (key == 224)) ? _getch() : key; }
 	EventsList list;
 	std::string name;
 };

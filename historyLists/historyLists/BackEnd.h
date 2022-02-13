@@ -1,4 +1,8 @@
 #pragma once
+#include<vector>
+#include<fstream>
+#include<climits>
+#include<string>
 
 class EventsList {
 public:
@@ -8,6 +12,11 @@ public:
 		char subject[121];
 		char leader[31];
 		char place[31];
+	};
+
+	struct ELEMENT {
+		ELEMENT* next, * prev;
+		DATA data;
 	};
 
 	EventsList() : current(nullptr), first(nullptr), last(nullptr) { memset(&dataToFind, 0, sizeof(dataToFind)); }
@@ -32,12 +41,9 @@ public:
 	bool saveToFile(std::string fileName);
 	bool loadFromFile(std::string fileName);
 
-private:
-	struct ELEMENT {
-		ELEMENT* next, * prev;
-		DATA data;
-	};
+	std::vector<ELEMENT*> foundAdrs; //Stores the addresses of the found events
 
+private:
 	DATA dataToFind;
 	ELEMENT* current, * first, * last;
 };

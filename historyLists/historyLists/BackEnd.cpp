@@ -1,6 +1,4 @@
 #include<iostream>
-#include<fstream>
-#include<climits>
 
 #include"BackEnd.h"
 #include"FrontEnd.h"

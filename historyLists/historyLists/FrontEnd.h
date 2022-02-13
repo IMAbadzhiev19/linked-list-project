@@ -1,4 +1,7 @@
 #pragma once
+#include<conio.h>
+#include<windows.h>
+
 #include"BackEnd.h"
 
 class Menu

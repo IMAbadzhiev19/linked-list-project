@@ -1,7 +1,4 @@
 #include<iostream>
-#include<string>
-#include<windows.h>
-#include<fstream>
 
 #include"FrontEnd.h"
 #include"BackEnd.h"

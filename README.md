@@ -24,3 +24,8 @@
 
 <details>
 <summary>If you want to install the souce code</summary>
+
+  <!--START_SECTION:activity-->
+1. Go to your command prompt;
+2. git init
+3. git clone https://github.com/IMAbadzhiev19/linked-list-project

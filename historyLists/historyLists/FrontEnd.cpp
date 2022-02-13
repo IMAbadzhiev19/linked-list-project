@@ -346,7 +346,70 @@ void Menu::changeInfo()
 
 void Menu::deleteEvents()
 {
+	findEvents();
 
+	int choice = 0, y = 2, size = list.foundAdrs.size();
+	system("cls");
+
+	for (int i = 0; i < size; i++)
+	{
+		gotoXY(4, y + i);
+		cout << list.foundAdrs[i]->data.year << "." << list.foundAdrs[i]->data.month << '.' << list.foundAdrs[i]->data.day << " |Subject - ";
+
+		if (strlen(list.foundAdrs[i]->data.subject) == 0)
+			cout << "Unknown";
+		else
+			cout << list.foundAdrs[i]->data.subject;
+
+		cout << " |Leader - ";
+
+		if (strlen(list.foundAdrs[i]->data.leader) == 0)
+			cout << "Unknown";
+		else
+			cout << list.foundAdrs[i]->data.leader;
+
+		cout << " |Place - ";
+
+		if (strlen(list.foundAdrs[i]->data.place) == 0)
+			cout << "Unknown";
+		else
+			cout << list.foundAdrs[i]->data.place;
+
+	}
+
+	while (true)
+	{
+		system("pause>nul");
+
+		if (GetAsyncKeyState(VK_DOWN) && (choice < size - 1))
+		{
+			gotoXY(1, y + choice); cout << "   ";
+			choice++;
+			gotoXY(1, y + choice); cout << "-> ";
+
+			continue;
+		}
+		else if (GetAsyncKeyState(VK_UP) && (choice > 0))
+		{
+			gotoXY(1, y + choice); cout << "   ";
+			choice--;
+			gotoXY(1, y + choice); cout << "-> ";
+
+			continue;
+		}
+		else if (GetAsyncKeyState(VK_RETURN))
+		{
+			system("cls");
+			break;
+		}
+	}
+
+	EventsList::DATA d{ 0, 0, 0, "", "", "" };
+
+	list.moveTo(list.foundAdrs[choice]);
+	list.remove();
+
+	system("cls");
 }
 
 //Account

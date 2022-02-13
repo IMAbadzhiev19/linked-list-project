@@ -34,3 +34,9 @@
 
 </details>
 <br>
+
+## License
+
+
+
+Copyright (c) [2021] [Nikolay Dimitrov]

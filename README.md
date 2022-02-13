@@ -29,3 +29,8 @@
 1. Go to your command prompt;
 2. git init
 3. git clone https://github.com/IMAbadzhiev19/linked-list-project
+  
+<!--END_SECTION:activity-->
+
+</details>
+<br>

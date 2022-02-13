@@ -1,5 +1,5 @@
 <p align="center">
-<img src=" ">
+<img width = "496" height = "379" src = Logo/Logo.png>
 </p>
 <h1 align="center">Hi 👋, We are team Chaos. We do programming on C++. This is our project on theme "history events".</h1>
 

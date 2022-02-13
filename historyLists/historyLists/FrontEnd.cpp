@@ -145,11 +145,35 @@ void Menu::displayOptions()
 			} break;
 			case 4:
 			{
-
+				if (name == "")
+				{
+					cout << "You must be logged into your account to use this benefits";
+					Sleep(1500);
+					displaySigninOptions();
+				}
+				else
+				{
+					list.loadFromFile(name + "-data");
+					changeInfo();
+					list.saveToFile(name + "-data");
+					system("cls");
+				}
 			} break;
 			case 5:
 			{
-
+				if (name == "")
+				{
+					cout << "You must be logged into your account to use this benefits";
+					Sleep(1500);
+					displaySigninOptions();
+				}
+				else
+				{
+					list.loadFromFile(name + "-data");
+					deleteEvents();
+					list.saveToFile(name + "-data");
+					system("cls");
+				}
 			} break;
 			case 6:
 			{
@@ -246,7 +270,78 @@ void Menu::findEvents()
 
 void Menu::changeInfo()
 {
+	findEvents();
 
+	int choice = 0, y = 2, size = list.foundAdrs.size();
+	system("cls");
+
+	for (int i = 0; i < size; i++)
+	{
+		gotoXY(4, y + i);
+		cout << list.foundAdrs[i]->data.year << "." << list.foundAdrs[i]->data.month << '.' << list.foundAdrs[i]->data.day << " |Subject - ";
+
+		if (strlen(list.foundAdrs[i]->data.subject) == 0)
+			cout << "Unknown";
+		else
+			cout << list.foundAdrs[i]->data.subject;
+
+		cout << " |Leader - ";
+
+		if (strlen(list.foundAdrs[i]->data.leader) == 0)
+			cout << "Unknown";
+		else
+			cout << list.foundAdrs[i]->data.leader;
+
+		cout << " |Place - ";
+
+		if (strlen(list.foundAdrs[i]->data.place) == 0)
+			cout << "Unknown";
+		else
+			cout << list.foundAdrs[i]->data.place;
+
+	}
+
+	while (true)
+	{
+		system("pause>nul");
+
+		if (GetAsyncKeyState(VK_DOWN) && (choice < size - 1))
+		{
+			gotoXY(1, y + choice); cout << "   ";
+			choice++;
+			gotoXY(1, y + choice); cout << "-> ";
+
+			continue;
+		}
+		else if (GetAsyncKeyState(VK_UP) && (choice > 0))
+		{
+			gotoXY(1, y + choice); cout << "   ";
+			choice--;
+			gotoXY(1, y + choice); cout << "-> ";
+
+			continue;
+		}
+		else if (GetAsyncKeyState(VK_RETURN))
+		{
+			system("cls");
+			break;
+		}
+	}
+
+	EventsList::DATA d{ 0, 0, 0, "", "", "" };
+	cout << "! IF YOU DON'T KNOW OR DON'T WANT TO GIVE DETAILS ABOUT THE DATE -> TYPE \"0\" !" << endl << "! IF YOU DON'T KNOW SOMETHING BELOW THE DATE PRESS ENTER !" << endl << endl;
+
+	cout << "Please enter the year of the event: "; cin >> d.year;
+	cout << "Please enter the month of the event: "; cin >> d.month;
+	cout << "Please enter the day of the event: "; cin >> d.day; cin.ignore();
+	cout << "Please enter the name of the event: "; cin.getline(d.subject, sizeof(d.subject));
+	cout << "Please enter the leader of the event: "; cin.getline(d.leader, sizeof(d.leader));
+	cout << "Please enter the place where the event happened: "; cin.getline(d.place, sizeof(d.place));
+
+	list.moveTo(list.foundAdrs[choice]);
+	list.set(d);
+
+	system("cls");
 }
 
 void Menu::deleteEvents()

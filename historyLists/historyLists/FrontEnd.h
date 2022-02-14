@@ -26,7 +26,7 @@ public:
 	std::string decToBin(int n);
 	char xor_func(char a, char b) { return (a == b) ? '0' : '1'; } //does xor operation
 	char flip(char c) { return (c == '0') ? '1' : '0'; } //changes the bits to the opposite one
-	std::string binaryToGray(std::string bin);
+	std::string binaryToGray(std::string bin); //used for password
 
 private:
 	EventsList list;

@@ -5,6 +5,8 @@
 
 using namespace std;
 
+int c = 0;
+
 void Menu::clearScreen()
 {
 	COORD cursor;
@@ -588,9 +590,25 @@ void Menu::Login()
 	bool flag = false;
 	int checks, info;
 
+	c++;
+	if (c == 2)
+	{
+		system("cls");
+		cout << "!!! YOU HAVE TO EXIT THE PROGRAM AND THAN LAUNCH IT AGAIN TO BE ABLE TO LOG INTO A DIFFERENT ACCOUNT !!!" << endl << endl;
+		Sleep(2000);
+		system("cls");
+		cout << "                         We will log you out after a second";
+		Sleep(1000);
+
+		system("cls");
+		cout << "                                     YOU HAVE SUCCESSFULLY QUITED" << endl;
+		exit(0);
+	}
+
 	while (flag != true)
 	{
 		system("cls");
+		cout << "!!! YOU HAVE TO EXIT THE PROGRAM AND THAN LAUNCH IT AGAIN TO BE ABLE TO LOG INTO A DIFFERENT ACCOUNT !!!" << endl << endl;
 
 		checks = 0; 
 		info = 1;

@@ -1,5 +1,5 @@
 <p align="center">
-<img src=" ">
+<img width = "496" height = "279" src = public/logo.png>
 </p>
 <h1 align="center">Hi 👋, We are team Chaos. We do programming on C++. This is our project on theme "history events".</h1>
 
@@ -10,7 +10,7 @@
 - Veleka Kostova (SCRUM TRAINER) – VYKostova19@codingburgas.bg
 - Ivaylo Abadzhiev (BACK-END DEVELOPER) - IMAbadzhiev19@codingburgas.bg
 - Nikolay Dimitrov (FRONT-END DEVELOPER)- NDDimitrov19@codingburgas.bg
-- Dimitar Ivanov (QA) - DSIvanov@codingburgas.bg
+- Dimitar Ivanov (QA) - DSIvanov19@codingburgas.bg
 
 
 
@@ -39,4 +39,4 @@
 
 
 
-Copyright (c) [2021] [Nikolay Dimitrov]
+Copyright (c) [2022] [Nikolay Dimitrov]

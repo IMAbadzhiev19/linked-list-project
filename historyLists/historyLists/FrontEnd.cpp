@@ -592,7 +592,8 @@ void Menu::Login()
 	{
 		system("cls");
 
-		checks = 0; info = 1;
+		checks = 0; 
+		info = 1;
 
 		cout << "      -- LOGIN --       " << endl;
 		cout << " ---------------------- " << endl;
@@ -607,7 +608,7 @@ void Menu::Login()
 
 		if (fi.fail()) {
 			system("cls");
-			cout << "Username doesn't match!" << endl;
+			cout << "                                 Username doesn't match!" << endl;
 			Sleep(1500);
 		}
 		else {
@@ -641,8 +642,9 @@ void Menu::Login()
 			flag = true;
 		else {
 			system("cls");
-			cout << "Password doesn't match" << endl;
+			cout << "                          Password doesn't match" << endl;
 			Sleep(1000);
+			displaySigninOptions();
 		}
 	}
 

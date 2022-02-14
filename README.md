@@ -10,7 +10,7 @@
 - Veleka Kostova (SCRUM TRAINER) – VYKostova19@codingburgas.bg
 - Ivaylo Abadzhiev (BACK-END DEVELOPER) - IMAbadzhiev19@codingburgas.bg
 - Nikolay Dimitrov (FRONT-END DEVELOPER)- NDDimitrov19@codingburgas.bg
-- Dimitar Ivanov (QA) - DSIvanov@codingburgas.bg
+- Dimitar Ivanov (QA) - DSIvanov19@codingburgas.bg
 
 
 

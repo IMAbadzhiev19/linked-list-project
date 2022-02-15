@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int c = 0;
+int c = 1;
 
 void Menu::clearScreen()
 {
@@ -590,7 +590,6 @@ void Menu::Login()
 	bool flag = false;
 	int checks, info;
 
-	c++;
 	if (c == 2)
 	{
 		system("cls");
@@ -657,7 +656,10 @@ void Menu::Login()
 			} while (!fi.eof());
 		}
 		if (checks == 2 && password != "")
+		{
+			c++;
 			flag = true;
+		}
 		else {
 			system("cls");
 			cout << "                          Password doesn't match" << endl;

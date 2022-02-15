@@ -537,6 +537,8 @@ void Menu::SignUp()
 		cout << "|         -> "; getline(cin, repeated_pass);  std::cout << "\033[F";
 		cout << " ---------------------------- " << endl;
 
+		Sleep(1000);
+
 		ifstream temp;
 		temp.open(username);
 
@@ -619,6 +621,8 @@ void Menu::Login()
 		cout << "|       Password:      |" << endl;
 		cout << "|     -> "; getline(cin, password);  std::cout << "\033[F";
 		cout << " ---------------------- " << endl;
+
+		Sleep(1000);
 
 		ifstream fi;
 		fi.open(name, ios::in);
